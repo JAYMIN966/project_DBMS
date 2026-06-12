@@ -22,8 +22,8 @@ This system allows players to register with their details and select multiple sp
 
 ### Admin Features
 - ✅ **Secure Login**: Admin authentication with JWT
-  - Username: `admin`
-  - Password: `admin123`
+  - Username: `your_admin_username`
+  - Password: `your_admin_password`
 - ✅ **Add Sports**: Create new sport options
 - ✅ **Delete Sports**: Remove sports (cascading delete from player associations)
 - ✅ **Sports Management Dashboard**: View all available sports
@@ -126,12 +126,12 @@ player_sports (
 3. **Configure environment (backend/.env):**
    ```env
    PG_HOST=localhost
-   PG_DATABASE=Councours_new
-   PG_USER=postgres
-   PG_PASSWORD=Jaymin@2006
+   PG_DATABASE=your_database_name
+   PG_USER=your_postgres_name
+   PG_PASSWORD=your_postgres_password
    PG_PORT=5432
-   ADMIN_USERNAME=admin
-   ADMIN_PASSWORD=admin123
+   ADMIN_USERNAME=your_admin_username
+   ADMIN_PASSWORD=your_admin_password
    ```
 
 4. **Start backend server:**
