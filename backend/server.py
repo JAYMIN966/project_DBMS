@@ -16,6 +16,7 @@ from datetime import datetime, timedelta, timezone
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
+
 # JWT Configuration
 SECRET_KEY = os.environ.get('SECRET_KEY')
 ALGORITHM = "HS256"
@@ -23,12 +24,21 @@ ALGORITHM = "HS256"
 # PG_Admin connection
 def get_db_config():
     return {
-        'host': os.environ.get('PG_HOST'),
-        'database': os.environ.get('PG_DATABASE'),
-        'user': os.environ.get('PG_USER'),
-        'password': os.environ.get('PG_PASSWORD'),
-        'port': os.environ.get('PG_PORT')
+        "host": os.environ.get("PG_HOST"),
+        "database": os.environ.get("PG_DATABASE"),
+        "user": os.environ.get("PG_USER"),
+        "password": os.environ.get("PG_PASSWORD"),
+        "port": os.environ.get("PG_PORT"),
+        "sslmode": "require"
     }
+
+try:
+    conn = psycopg2.connect(**get_db_config())
+    print("✅ Connected to Neon successfully!")
+    conn.close()
+except Exception as e:
+    print("❌ Connection failed:")
+    print(e)
 
 @contextmanager
 def get_db_connection():
@@ -108,6 +118,9 @@ async def admin_login(login: AdminLogin):
     admin_user = os.environ.get('ADMIN_USERNAME')
     admin_pass = os.environ.get('ADMIN_PASSWORD')
     
+    print("ADMIN_USERNAME =", os.environ.get('ADMIN_USERNAME'))
+    print("ADMIN_PASSWORD =", os.environ.get('ADMIN_PASSWORD'))
+
     if login.username != admin_user or login.password != admin_pass:
         raise HTTPException(status_code=401, detail="Invalid credentials")
     
